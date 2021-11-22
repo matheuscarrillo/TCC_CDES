@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{{ url_for('index') }}" method="POST"> 
+  <div class="form-group">
+    <div class="row">
+      <div class="col-2 d-flex justify-content-center">
+        <div class="col-6 align-self-center">
+          <h5 class='text-center align-middle'>Sistema OffGrid</h5>
+        </div>
+        <div class="col-6 align-self-cente">
+          {% if status_offgrid== True %}
+            <button name="btn_liga_offgrid" type="submit" class="form-control btn ">
+              <span style="font-size: 3em; color: rgba(53, 187, 0, 0.76);">
+                <i class="fa fa-toggle-on"></i>
+              </span>
+            </button>
+          {% else %}
+            <button name="btn_desliga_offgrid" type="submit" class="form-control btn ">
+              <span style="font-size: 3em; color: rgb(255, 0, 0);">
+                <i class="fa fa-toggle-off"></i>
+              </span>
+            </button>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-8">
+        <div class="d-flex justify-content-around" style="border:5px solid #000000;" >
+          <div class="p-2">
+              <h5 class="text-center">Carga Acumulada</h5>
+              <h5 class="text-center">{{soma_potencias}} Wh</h5>
+          </div>
+          <div class="p-2 ">
+            <h5 class="text-center">Carga Inversor Utilizada</h5>
+            {% if status_offgrid== True %}
+              <h5 class="text-center">{{ pct_pot_inv }}%</h5>
+            {% else %}
+              <h5 class="text-center">-</h5>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2 d-flex justify-content-center">
+        <button name="goto_config" type="submit" class="form-control btn ">
+          <i class="fa fa-cog fa-5x"></i>
+        </button>
+      </div>
+    </div>    
+    
+    <div class="row mt-5">
+      <div class="col-4 mt-3">
+        <img class="rounded mx-auto d-block" src="{{url_for('static', filename='icon_iluminacao.png')}}">
+        <h3 class="text-center mt-2">Iluminação</h2>
+        <div class="row">
+          <div class="col">
+          {% if status_botao1 == True %}
+            <button name="btn_liga_1" type="submit" class="form-control btn " width="20px">
+              <span style="font-size: 3em; color: rgba(53, 187, 0, 0.76);">
+                <i class="fa fa-power-off fa-1x" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          {% else %}
+            <button name="btn_desliga_1" type="submit" class="form-control btn" width="20px">
+              <span style="font-size: 3em; color: rgb(255, 0, 0);">
+                <i class="fa fa-power-off fa-1x" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+        {% endif %}
+        </div>
+      </div>
+
+      <div class="col-4 mt-3">
+        <img class="rounded mx-auto d-block" src="{{url_for('static', filename='icon_geladeira.png')}}">
+        <h3 class="text-center mt-2">Geladeira</h2>
+        <div class="row">
+          <div class="col">
+          {% if status_botao2 == True %}
+            <button name="btn_liga_2" type="submit" class="form-control btn" width="20px">
+              <span style="font-size: 3em; color: rgba(53, 187, 0, 0.76);">
+                <i class="fa fa-power-off fa-1x" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          {% else %}
+            <button name="btn_desliga_2" type="submit" class="form-control btn" width="20px">
+              <span style="font-size: 3em; color: rgb(255, 0, 0);">
+                <i class="fa fa-power-off fa-1x" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+        {% endif %}
+        </div>
+      </div>
+
+      <div class="col-4 mt-3">
+        <img class="rounded mx-auto d-block" src="{{url_for('static', filename='icon_motor.png')}}">
+        <h3 class="text-center mt-2">Motor</h2>
+        <div class="row">
+          <div class="col">
+          {% if status_botao3 == True %}
+            <button name="btn_liga_3" type="submit" class="form-control btn" width="20px">
+              <span style="font-size: 3em; color: rgba(53, 187, 0, 0.76);">
+                <i class="fa fa-power-off fa-1x" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          {% else %}
+            <button name="btn_desliga_3" type="submit" class="form-control btn" width="20px">
+              <span style="font-size: 3em; color: rgb(255, 0, 0);">
+                <i class="fa fa-power-off fa-1x" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col mt-5">
+        <h3 class="text-center mt-2">Relatório Informativo</h2>
+        <div class="row">
+          <div class="col">
+            <div class="d-flex justify-content-center">
+              <button name="goto_relatorio" type="submit" class="btn btn-default">
+                <img src="{{url_for('static', filename='icon_relatorio.png')}}" width="100" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+
+
+</form>
+{% endblock %}

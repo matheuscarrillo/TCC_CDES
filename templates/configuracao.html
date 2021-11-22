@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-danger" role="alert">
+        <h6 class="{{ category }}">{{ message }}</h6>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<form action="{{ url_for('configuracao') }}" method="POST"> 
+  <div class="form-group">
+    <h1>Configurações do Sistema</h1>
+
+    <div class="row mt-5">
+      <div class="col-6">
+        <div class="container">
+          <ul>
+            <li><h3>Funcionamento Sistema Off-Grid:</h3></li>
+          </ul>
+          <img class="rounded mx-auto d-block mt-5" src="{{url_for('static', filename='icon_relogio.png')}}" width="150">
+
+          <div class="row mt-5">
+            <div class="col-8 d-flex justify-content-center">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Horário</span>
+                </div>
+                <input name="text_horario" type="text" class="form-control text-center" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="00:00">
+              </div>
+            </div>
+            <div class="col-4 ">
+              <button name="aplica_horario" type="submit" class="btn btn-success">Aplicar</button>
+            </div>
+          </div>
+        </div>
+        <ul class="list-group mt-3">
+            <h5>Inicio: </h5>
+            <li class="list-group-item">{{horarios['Horários OffGrid'][0]}}</li>
+            <h5>Fim: </h5>
+            <li class="list-group-item">{{horarios['Horários OffGrid'][1]}}</li>
+        </ul>
+      </div>
+
+      <div class="col-6">
+        <div class="container">
+          <ul>
+            <li><h3>Prioridade dos Equipamentos:</h3></li>
+          </ul>
+          
+          <table class="table table-bordered mt-5">
+            <thead>
+              <tr>
+                <th scope="col">Nível Prioridade</th>
+                <th scope="col">Nome Equipamento</th>
+              </tr>
+            </thead>
+            {% for index, row in prioridade.iterrows() %}
+              <tr>
+                <th scope="col">{{ index+1 }}</th>
+                <td scope="row">{{ row['Nome do Equipamento'] }}</td>
+              </tr>
+            {% endfor %}
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+        <div class="row mt-5">
+
+          <div class="col-6">
+            <select name="equipamento" class="form-control custom-select">
+              <option selected>Selecione um Equipamento</option>
+              <option value="geladeira">Geladeira</option>
+              <option value="iluminacao">Iluminação</option>
+              <option value="motor">Motor</option>
+            </select>
+          </div>
+
+          <div class="col-4">
+            <select name="nivel_prioridade" class="form-control custom-select">
+              <option selected>Prioridade</option>
+              <option value="1">1 - Alta</option>
+              <option value="2">2 - Média</option>
+              <option value="3">3 - Baixa</option>
+            </select>
+          </div>
+
+          <div class="col-2">
+            <button name="aplica_prioridade" type="submit" class="btn btn-success">Aplicar</button>
+          </div>
+
+        </div>
+
+        <div class="row mt-5">
+            <ul>
+              <li><h3>Potência Inversor:</h3></li>
+            </ul>
+
+          <div class="col-8 d-flex justify-content-center">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Potência</span>
+              </div>
+              <input name="text_potenciatotal" type="text" class="form-control text-center" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="{{pot_total}}W">
+            </div>
+          </div>
+          <div class="col-4">
+            <button name="aplica_potenciatotal" type="submit" class="btn btn-success">Aplicar</button>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+  
+  
+  
+
+
+</form>
+{% endblock %}

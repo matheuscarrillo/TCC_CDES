@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Relatório Informativo</h2>
+<div class="row">
+  <div class="col-6">
+    <div class="container">
+      <embed type="image/svg+xml" src={{geracao_consumo_pontual|safe}} style='max-width:600px'/>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="container">
+      <embed type="image/svg+xml" src={{consumo_equip_atual|safe}} style='max-width:600px'/>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <div class="container">
+      <embed type="image/svg+xml" src={{geracao_consumo_semanal|safe}} style='max-width:600px'/>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="container">
+      <embed type="image/svg+xml" src={{consumo_equip_dia|safe}} style='max-width:600px'/>
+    </div>
+  </div>
+</div>
+{% endblock %}
