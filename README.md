@@ -1,5 +1,4 @@
-# TCC_CDES
-Controle de Demanda para Energia Solar
+# TCC -  Controle de Demanda para Energia Solar
 
 Visando o alto consumo da energia elétrica principalmente em horários de pico, falta de energia e utilização de fontes renováveis para o meio ambiente, o objetivo do projeto baseia se em sistemas de energia solar junto com a internet das coisas (IoT), para controlar e remanejar o consumo elétrico.
 
