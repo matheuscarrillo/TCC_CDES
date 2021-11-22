@@ -1,4 +1,4 @@
-###Bibliotecas
+.###Bibliotecas
 
 #flask permite a conexão entre o front e backend
 from flask import Flask, render_template, redirect, request, url_for, flash
@@ -82,6 +82,7 @@ def index():
             arquivo.close()
             sist_offgrid = False
             dict_status.update({'Sistema_OffGrid': sist_offgrid})
+            
         if "btn_desliga_offgrid" in request.form:
             arquivo = open('acionamento_offgrid.txt', 'w')
             arquivo.write('Ligar Offgrid')
@@ -94,17 +95,6 @@ def index():
             arquivo = open('acionamento.txt', 'w')
             arquivo.write('Desligar Lampada')
             arquivo.close()
-
-            df_externo['Comando'] = 'N/A'
-            df_externo.to_excel('Comando_Externo.xlsx', index=False)
-
-
-            df_ler = pd.read_excel('Ler_PZEM.xlsx')
-            carga = df_ler['Leitura'][0]
-            carga = carga-45
-            df_ler['Leitura'] = carga
-            df_ler.to_excel('Ler_PZEM.xlsx', index=False)
-            
             botao_1 = False
             dict_status.update({'Botao_1': botao_1})
         if "btn_desliga_1" in request.form:
@@ -113,14 +103,6 @@ def index():
             arquivo.close()
             arquivo_desligar = open('arquivo_desligar.txt', 'w')
             arquivo_desligar.close()
-
-
-            df_ler = pd.read_excel('Ler_PZEM.xlsx')
-            carga = df_ler['Leitura'][0]
-            carga = carga+45
-            df_ler['Leitura'] = carga
-            df_ler.to_excel('Ler_PZEM.xlsx', index=False)
-
             botao_1 = True
             dict_status.update({'Botao_1': botao_1})
 
@@ -129,9 +111,9 @@ def index():
             arquivo = open('acionamento.txt', 'w')
             arquivo.write('Desligar Geladeira')
             arquivo.close()
-
             botao_2 = False
             dict_status.update({'Botao_2': botao_2})
+
         if "btn_desliga_2" in request.form:
             arquivo = open('acionamento.txt', 'w')
             arquivo.write('Ligar Geladeira')
@@ -144,32 +126,13 @@ def index():
             arquivo = open('acionamento.txt', 'w')
             arquivo.write('Desligar Motor')
             arquivo.close()
-
-            df_externo['Comando'] = 'N/A'
-            df_externo.to_excel('Comando_Externo.xlsx', index=False)
-
-            
-            df_ler = pd.read_excel('Ler_PZEM.xlsx')
-            carga = df_ler['Leitura'][0]
-            carga = carga-60
-            df_ler['Leitura'] = carga
-            df_ler.to_excel('Ler_PZEM.xlsx', index=False)
-
             botao_3 = False
             dict_status.update({'Botao_3': botao_3})
+
         if "btn_desliga_3" in request.form:
             arquivo = open('acionamento.txt', 'w')
             arquivo.write('Ligar Motor')
             arquivo.close()
-
-
-            
-            df_ler = pd.read_excel('Ler_PZEM.xlsx')
-            carga = df_ler['Leitura'][0]
-            carga = carga+60
-            df_ler['Leitura'] = carga
-            df_ler.to_excel('Ler_PZEM.xlsx', index=False)
-            
             botao_3 = True
             dict_status.update({'Botao_3': botao_3})
 
